@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOME DA SUA EMPRESA - Importação & Logística Global</title>
+    <style>
+        /* --- RESET E CONFIGURAÇÕES GERAIS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --bg-body: #141414;        /* Fundo geral ultra escuro (quase preto) */
+            --bg-card: #1d1d1f;        /* Fundo do box central */
+            --text-primary: #ffffff;   /* Texto branco principal */
+            --text-secondary: #a1a1a5; /* Texto cinza claro */
+            --color-accent: #cc0000;   /* Vermelho do botão ativo */
+            --color-hover: #b30000;    /* Vermelho mais escuro para o efeito de passar o mouse */
+            --border-color: #2c2c2e;   /* Borda sutil dos elementos */
+            --color-title: #00b37e;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            background-color: #141414;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo h1 {
+            color: var(--color-accent);
+            font-size: 22px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .contact-top-header {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* --- MENU DE NAVEGAÇÃO PRINCIPAL --- */
+        nav {
+            background-color: #141414;
+            display: flex;
+            align-items: center;
+            padding: 10px 40px;
+            border-bottom: 1px solid #2c2c2e;
+            align-self: center;
+        }
+        .nav-logo h1 {
+            color: #00b37e; /* Mantém o verde padrão da identidade ou use var(--color-title) */
+            font-size: 18px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-btn {
+            background-color: #2c2c2e;
+            color: #a1a1a5;
+            border: none;
+            padding: 10px 20px; /* Altura controlada para não esticar */
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            background-color: #3a3a3c;
+            color: #ffffff;
+        }
+
+        .nav-btn.active {
+            background-color: #cc0000 !important; /* Vermelho do seu print anterior */
+            color: #ffffff !important;
+        }
+        
+        .nav-menu-buttons {
+            display: flex;
+            gap: 10px; /* Espaço entre um botão e outro */
+            align-items: center;
+        }
+
+        /* --- CONTEÚDO PRINCIPAL (MEIO DA TELA) --- */
+        main {
+            background: #323238;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alinha no topo para conteúdos maiores */
+            padding: 50px 20px;
+        }
+
+        .page-content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: none; /* Esconde por padrão */
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Classe para mostrar a página ativa */
+        .page-content.active {
+            display: block;
+        }
+
+        /* Títulos e Parágrafos */
+        .page-content h2 {
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--color-accent);
+            padding-left: 15px;
+        }
+
+        .page-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .subtitle {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* --- COMPONENTES ESPECÍFICOS --- */
+        
+        /* Grid de Estatísticas (Início) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background-color: var(--bg-body);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-box .number {
+            font-size: 36px;
+            color: var(--color-accent);
+            font-weight: 800;
+        }
+
+        .stat-box .label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Lista de Produtos (Matéria-Prima) */
+        .product-list {
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .product-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Painel de Rastreio */
+        .tracking-box {
+            background-color: var(--bg-body);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--color-accent);
+            text-align: center;
+        }
+
+        .tracking-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .tracking-btn {
+            background-color: var(--color-accent);
+            color: #fff;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .tracking-btn:hover {
+            background-color: var(--color-hover);
+        }
+
+        /* Formulário de Cotação */
+        .quote-form label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-body);
+            color: #fff;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        /* Animação suave de transição */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+
+    <nav>
+        <div class="nav-logo">
+            <h1><img width="200px" src="https://cdn.discordapp.com/attachments/1489629282765377776/1505336406061617222/logocc.png?ex=6a0a4147&is=6a08efc7&hm=229d2a48ce27745f12d8e9e49dad1aa62c501159f59d847894bf3fb61b513c00&"></h1> </div>
+    
+        <div class="nav-menu-buttons">
+            <button class="nav-btn active" onclick="openPage('home', this)">Início</button>
+            <button class="nav-btn" onclick="openPage('materias', this)">Estatísticas</button>
+            <button class="nav-btn" onclick="openPage('logistica', this)">Gerenciamento</button>
+            <button class="nav-btn" onclick="openPage('rastreio', this)">Configurações</button>
+            <button class="nav-btn" onclick="openPage('cotacao', this)">Suporte</button>
+        </div>
+    </nav>
+
+    <main>
+        
+        <div id="home" class="page-content active">
+            <h2>Pontualidade Global, Abastecimento Nacional</h2>
+            <p>Seja bem-vindo à <strong>NOME DA EMPRESA</strong>. Somos especialistas em conectar a indústria nacional aos melhores fornecedores globais de matérias-primas essenciais. Nossa inteligência logística garante que sua cadeia de suprimentos nunca pare, eliminando burocracias e reduzindo custos operacionais.</p>
+            
+            <p class="subtitle">Nossa Operação em Números:</p>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">+1000</div>
+                    <div class="label">Containers Importados</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">99.8%</div>
+                    <div class="label">Entregas no Prazo</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">+15</div>
+                    <div class="label">Países Parceiros</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">24/7</div>
+                    <div class="label">Suporte e Monitoramento</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="materias" class="page-content">
+            <h2>Catálogo de Soluções e Insumos</h2>
+            <p>Abastecemos diversos setores da indústria com insumos homologados e certificados internacionalmente. Garanta a qualidade do seu produto final com matéria-prima de procedência garantida.</p>
+            
+            <p class="subtitle">Setores Atendidos:</p>
+            <ul class="product-list">
+                <li><strong>Indústria Química:</strong> Polímeros, solventes, reagentes especiais e catalisadores.</li>
+                <li><strong>Agronegócio:</strong> Fertilizantes de alta tecnologia, defensivos e insumos para nutrição animal.</li>
+                <li><strong>Metalurgia & Construção:</strong> Ligas especiais, aço e minérios de alta pureza.</li>
+                <li><strong>Farmacêutica & Alimentos:</strong> Princípios ativos (APIs) e aditivos certificados (COA).</li>
+                <li><strong>Indústria de Plásticos:</strong> Resinas termoplásticas, masterbatches e aditivos.</li>
+            </ul>
+        </div>
+
+        <div id="logistica" class="page-content">
+            <h2>Inteligência de Ponta a Ponta</h2>
+            <p>Mais do que transporte, nós entregamos previsibilidade. Nossa equipe gerencia todo o fluxo de <em>Supply Chain</em>, desde o chão da fábrica na origem até a entrega no seu armazém (Door-to-Door).</p>
+            
+            <p class="subtitle">Nossos Serviços Logísticos:</p>
+            <ul class="product-list">
+                <li><strong>Frete Internacional:</strong> Soluções Marítimas (FCL/LCL) e Aéreas com taxas competitivas.</li>
+                <li><strong>Desembaraço Aduaneiro:</strong> Equipe de despachantes interna para máxima agilidade e redução de entraves burocráticos nos portos.</li>
+                <li><strong>Armazenagem Estratégica:</strong> Pontos de apoio próximos aos principais portos e aeroportos para cross-docking.</li>
+                <li><strong>Transporte Rodoviário:</strong> Frota dedicada para entrega final na sua fábrica com segurança e rastreamento.</li>
+            </ul>
+        </div>
+
+        <div id="rastreio" class="page-content">
+            <h2>Acompanhe sua Carga em Tempo Real</h2>
+            <p>A previsibilidade é a chave para o sucesso da sua indústria. Utilize nosso painel tecnológico para monitorar o status do seu pedido, container ou lote de matéria-prima.</p>
+            
+            <div class="tracking-box">
+                <input type="text" class="tracking-input" placeholder="Digite o número do Container / BL / Pedido...">
+                <button class="tracking-btn">Consultar Status</button>
+            </div>
+            
+            <p style="text-align: center; font-size: 13px; margin-top: 15px;"><em>*Para integrações completas via API com seu ERP, consulte nosso time comercial.*</em></p>
+        </div>
+
+        <div id="cotacao" class="page-content">
+            <h2>Solicite um Orçamento sem Compromisso</h2>
+            <p>Nossa equipe de especialistas está pronta para analisar sua demanda de importação e oferecer a melhor solução de custo-benefício. Preencha os detalhes abaixo para receber uma cotação formal.</p>
+            
+            <form class="quote-form">
+                <div class="form-group">
+                    <label>Tipo de Matéria-Prima / Insumo:</label>
+                    <input type="text" class="form-input" placeholder="Ex: Resina Polietileno">
+                </div>
+                
+                <div class="form-group">
+                    <label>Volume Estimado (Toneladas / Containers):</label>
+                    <input type="text" class="form-input" placeholder="Ex: 50 Tons / 2 Containers">
+                </div>
+
+                <div class="form-group">
+                    <label>Porto de Origem e Destino Final:</label>
+                    <input type="text" class="form-input" placeholder="Ex: Shanghai p/ Porto de Santos / São Paulo-SP">
+                </div>
+
+                <div class="form-group">
+                    <label>Sua Mensagem / Detalhes Adicionais:</label>
+                    <textarea class="form-textarea" placeholder="Caso possua Ficha Técnica, mencione aqui ou envie por e-mail."></textarea>
+                </div>
+
+                <button type="submit" class="nav-btn" style="background-color: var(--color-accent); color: white; width: 100%;">
+                    Enviar Solicitação de Cotação
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NOME DA SUA EMPRESA S/A. Todos os direitos reservados. CNPJ: [TROQUE AQUI CNPJ]</p>
+        <p style="font-size: 11px;">Especialistas em Comércio Exterior e Logística Industrial.</p>
+    </footer>
+
+    <script>
+        function openPage(pageId, button) {
+            // 1. Esconde todas as páginas que estão abertas
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+
+            // 2. Remove o estilo ativo de todos os botões do menu
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // 3. Mostra a página que o usuário clicou
+            document.getElementById(pageId).classList.add('active');
+            
+            // 4. Ativa o botão que foi clicado no menu
+            button.classList.add('active');
+            
+            // 5. Rola suavemente para o topo da página para melhor experiência
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
